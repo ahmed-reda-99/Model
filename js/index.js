@@ -24,22 +24,43 @@ for (var i = 0; i < imgs.length; i++) {
 
 
 next.addEventListener('click', function () {
+    nextMove();
+})
+function nextMove(){
     currentIndex++;
     if (currentIndex == imgsArray.length) {
         currentIndex = 0;
     }
     lightBoxItem.style.backgroundImage = `url('${imgsArray[currentIndex].src}')`;
-});
-
+}
 prev.addEventListener('click', function () {
+    prevMove();
+})
+function prevMove(){
     currentIndex--;
     if (currentIndex < 0) {
         currentIndex = imgsArray.length - 1;
     }
     lightBoxItem.style.backgroundImage = `url('${imgsArray[currentIndex].src}')`;
-});
-
+}
 wClose.addEventListener('click', function () {
     lightBoxContainer.classList.remove('show');
 });
 
+document.addEventListener("keydown",function(eventinfo){
+    if(eventinfo.keyCode == 27){
+        lightBoxContainer.classList.remove("show");
+  
+  }
+  else if(eventinfo.keyCode == 39){
+    nextMove();
+  } 
+  else if (eventinfo.keyCode == 37){
+    prevMove();
+  }
+})
+lightBoxContainer.addEventListener("click",function(e){
+ if (e.target == lightBoxContainer){
+    lightBoxContainer.classList.remove("show") }
+
+})
